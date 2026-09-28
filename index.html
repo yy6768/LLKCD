@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Log-linear Kernel Cluster Distillation for Lightweight Neural Monte Carlo Denoising. SIGGRAPH Asia 2026 · Forthcoming. Nanjing University.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f9fc">
+  <title>Log-linear Kernel Cluster Distillation · SIGGRAPH Asia 2026</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232d5be3'/%3E%3Cpath d='M8 8v16h16M13 8v11h11M18 8v6h6' fill='none' stroke='white' stroke-width='2.5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="LLKCD project home"><svg width="25" height="25" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 5v22h22M12 5v15h15M19 5v8h8" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>LLKCD <span>/ NJU</span></a>
+    <nav aria-label="Main navigation"><a href="assets/documents/paper.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="#demo">Demo</a></nav>
+  </header>
+  <main id="main" class="page-wrap">
+    <section class="paper-header" id="top" aria-labelledby="paper-title">
+      <p class="venue">SIGGRAPH ASIA 2026 <span>· Forthcoming</span></p>
+      <h1 id="paper-title">Log-linear Kernel Cluster Distillation<span>for Lightweight Neural Monte Carlo Denoising</span></h1>
+      <div class="authors"><span>Ye Yuan</span><span>Zijuan Yuan</span><span>Junyuan He</span><span>Ziren Wang</span><span>Changyun Zhi</span><span>Chenxi Zhou</span><span>Boshan Liu</span><span>Yanwen Guo</span><span>Jie Guo<sup>†</sup></span></div>
+      <p class="affiliation">State Key Lab for Novel Software Technology, Nanjing University</p>
+      <p class="corresponding">† Corresponding author</p>
+
+      <div class="paper-links">
+        <a class="button primary" href="assets/documents/paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7zm0 0v5h4M9 12h6M9 16h6"/></svg>Read paper</a>
+        <a class="button" href="#demo">Interactive demo</a>
+        <a class="text-link" href="assets/documents/supplementary.pdf" target="_blank" rel="noopener">Supplementary ↗</a>
+      </div>
+      <p class="paper-summary">A lightweight Monte Carlo denoiser that predicts mixtures of kernel archetypes and residual offsets, retaining near-teacher image quality with <strong>60.7% less inference time.</strong></p>
+    </section>
+    <section id="demo" aria-labelledby="demo-title">
+      <div class="demo-heading"><h2 id="demo-title">Interactive demo</h2><span>Drag to compare</span></div>
+      <div class="scene-tabs" id="comparisons" role="group" aria-label="Comparison scene"><button type="button" data-scene="bistro1-day" class="active" aria-pressed="true">Bistro</button><button type="button" data-scene="zeroday" aria-pressed="false">Zeroday</button><button type="button" data-scene="dining-room" aria-pressed="false">Dining Room</button><button type="button" data-scene="bedroom" aria-pressed="false">Bedroom</button><button type="button" data-scene="kitchen" aria-pressed="false">Kitchen</button></div>
+      <div class="comparison-layout">
+        <figure class="scene-overview"><div class="scene-overview-labels"><span>Noisy input · 1 spp</span><span>Ours</span><span>Reference</span></div><img id="scene-image" src="assets/comparisons/bistro1-day_cor.webp" alt="Bistro scene overview with the two comparison crop locations marked" width="1300" height="732" fetchpriority="high"><figcaption><span id="scene-credit">Bistro © Amazon Lumberyard</span><span>Red box: A · Green box: B</span></figcaption></figure>
+        <div class="detail-comparison">
+          <div class="comparison-controls"><label>Compare with<select id="baseline-select"><option value="Input">Noisy input</option><option value="NPPD-Lite">NPPD (Small)</option><option value="NPPD">NPPD (Teacher)</option><option value="FAN">FAN</option><option value="OptiX">ONND / OptiX</option><option value="OIDN">OIDN</option><option value="Reference">Reference</option></select></label><div class="region-control"><span>Crop region</span><div class="segmented" role="group" aria-label="Crop region"><button type="button" data-crop="A" class="active" aria-pressed="true">A</button><button type="button" data-crop="B" aria-pressed="false">B</button></div></div></div>
+          <div class="wipe crop-wipe" id="crop-wipe" style="--split:50%"><img class="wipe-base" id="crop-ours" src="assets/comparisons/bistro1-day_Ours_cropA.webp" width="120" height="120" alt="Our reconstruction, Bistro detail A" loading="lazy"><img class="wipe-overlay" id="crop-before" src="assets/comparisons/bistro1-day_Input_cropA.webp" width="120" height="120" alt="Noisy input, Bistro detail A" loading="lazy"><div class="image-label left" id="crop-before-label">Noisy input</div><div class="image-label right ours-label">Ours</div><div class="wipe-divider" aria-hidden="true"><span>‹<i></i>›</span></div><input class="wipe-range" id="crop-range" type="range" min="0" max="100" value="50" aria-label="Reveal our detail against the selected baseline" aria-valuetext="50 percent comparison image"></div>
+          <div class="crop-caption"><span>Drag to compare · enlarged paper crops</span><span id="crop-status" role="status">Bistro / Detail A</span></div>
+        </div>
+      </div>
+      <div class="key-results"><span><strong>16.3 ms</strong> at 1080p</span><span><strong>60.7%</strong> less time than NPPD Teacher</span><span><strong>8.8M</strong> parameters</span></div>
+      <p class="measurement-note">RTX 4090 · FP16 / TensorRT 10.13 · fused CUDA filtering · I/O excluded.</p>
+
+    </section>
+    <div class="paper-extras">
+      <details class="disclosure" id="method"><summary>Method overview <span aria-hidden="true">+</span></summary><div class="disclosure-body method-body"><p>The student predicts compact mixtures of teacher-derived archetypes and residual offsets. A log-linear expansion reconstructs normalized kernels, while image- and kernel-space distillation preserve the teacher’s filtering behavior.</p>
+<button class="zoom-figure" type="button" data-figure="assets/architecture.webp" data-caption="Kernel cluster distillation pipeline from the manuscript." aria-label="Enlarge the distillation pipeline"><img src="assets/architecture.webp" alt="A pretrained NPPD teacher and lightweight student process the same inputs, with archetype generation, log-linear expansion and image-space and kernel-space losses" loading="lazy" width="2304" height="1296"><span class="zoom-indicator" aria-hidden="true">↗</span></button>
+      </div></details>
+      <details class="disclosure" id="citation"><summary>Citation <span aria-hidden="true">+</span></summary><div class="disclosure-body"><div class="citation-toolbar"><span>Prepublication BibTeX</span><button type="button" class="copy-button" id="copy-citation">Copy BibTeX</button></div>
+<pre class="citation"><code id="bibtex">@inproceedings{yuan2026loglinear,
+  title  = {Log-linear Kernel Cluster Distillation for
+            Lightweight Neural Monte Carlo Denoising},
+  author = {Yuan, Ye and Yuan, Zijuan and He, Junyuan and
+            Wang, Ziren and Zhi, Changyun and Zhou, Chenxi and
+            Liu, Boshan and Guo, Yanwen and Guo, Jie},
+  booktitle = {SIGGRAPH Asia 2026 Conference Papers},
+  year   = {2026},
+  doi    = {10.1145/3829340.3842233},
+  note   = {Forthcoming}
+}</code></pre>
+      <span class="sr-only" id="copy-status" role="status"></span></div></details>
+    </div>
+  </main>
+  <footer class="page-wrap"><span>Nanjing University · 2026</span><a class="text-link" href="assets/supplementary-video.mp4" target="_blank" rel="noopener">Supplementary video ↗</a></footer>
+  <dialog id="figure-dialog" aria-label="Enlarged paper figure"><div class="dialog-top"><span id="figure-caption"></span><button type="button" id="close-figure" aria-label="Close enlarged figure">×</button></div><img id="figure-image" alt=""></dialog>
+  <noscript><p class="page-wrap">Enable JavaScript for the image comparisons. The paper, supplementary material and method overview remain available.</p></noscript>
+</body>
+</html>
